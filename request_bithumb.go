@@ -222,8 +222,6 @@ func (b *BithumbRequester) GetCandleStick(orderCurreny Currency, paymentCurrency
 	var rawResult RawCandleStick
 	_ = json.Unmarshal(requestResult, &rawResult)
 
-	timelog(string(requestResult))
-
 	if rawResult.Status != 0 {
 		timelog("GetCandleStick failed : ", rawResult.Message)
 		var result []OneCandleStick
