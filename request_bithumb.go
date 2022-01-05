@@ -509,13 +509,6 @@ func (b *BithumbRequester) WithDrawCoin(orderCurrency Currency, amount float64, 
 			return errors.New("XRP 출금 시 destination tag(int) 를 지정해주지 않음, 또는 STEEM 출금 시 입금 메모를 지정해주지 않음")
 		}
 	}
-	if orderCurrency == XMR {
-		if len(destination) == 1 && reflect.TypeOf(destination) == reflect.TypeOf("1") {
-			passVal["destination"] = destination[0].(string)
-		} else {
-			return errors.New("XMR 출금 시 Payment ID를 지정해주지 않음")
-		}
-	}
 
 	reqResult := b.privateRequest(b.withdrawalCoin, passVal)
 	errNo := reqResult["status"].(string)
