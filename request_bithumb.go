@@ -158,8 +158,8 @@ func (b *BithumbRequester) GetOrderbook(orderCurrency Currency, paymentCurrency 
 	return result, reqTime, nil
 }
 
-func (b *BithumbRequester) GetTransactionHistory(orderCurrency Currency, paymentCurrency Currency) ([]OneTransaction, error) {
-	reqResult := b.publicRequest(b.trHistory, string(orderCurrency)+"_"+string(paymentCurrency))
+func (b *BithumbRequester) GetTransactionHistory(orderCurrency Currency, paymentCurrency Currency, count int) ([]OneTransaction, error) {
+	reqResult := b.publicRequest(b.trHistory, fmt.Sprintf("%v_%v?count=%d", string(orderCurrency), string(paymentCurrency), count))
 
 	// Error check
 	errNo := reqResult["status"].(string)
